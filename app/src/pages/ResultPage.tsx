@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import PersonalitySlider from '../components/PersonalitySlider';
+import { isWechatBrowser } from '../hooks/useQuizState';
 import type { PersonalityResult, DimensionScore } from '../types';
 
 interface ResultPageProps {
@@ -84,6 +85,7 @@ export default function ResultPage({ personality, dimensionResults, onRestart }:
   const [showContent, setShowContent] = useState(false);
   const [showPoster, setShowPoster] = useState(false);
   const [posterImage, setPosterImage] = useState<string | null>(null);
+  const [showWechatTip, setShowWechatTip] = useState(false);
   const posterRef = useRef<HTMLDivElement>(null);
   const qrRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -148,11 +150,26 @@ export default function ResultPage({ personality, dimensionResults, onRestart }:
 
   // Download: use the same canvas captured above
   const handleDownloadPoster = () => {
+    // 微信浏览器：显示提示弹窗
+    if (isWechatBrowser()) {
+      setShowWechatTip(true);
+      return;
+    }
+    // 正常浏览器：直接下载
     if (!canvasRef.current) return;
     const link = document.createElement('a');
     link.download = `肇BTI-${personality.code}.png`;
     link.href = canvasRef.current.toDataURL('image/png');
     link.click();
+  };
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      alert('链接已复制到剪贴板');
+    } catch {
+      alert('复制失败，请手动复制地址栏链接');
+    }
   };
 
   return (
@@ -361,6 +378,44 @@ export default function ResultPage({ personality, dimensionResults, onRestart }:
           </motion.div>
         </div>
       )}
+    {/* ===== WeChat Download Tip Modal ===== */}
+    {showWechatTip && (
+      <div
+        className="fixed inset-0 z-[110] p-4"
+        style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+      >
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowWechatTip(false)} />
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.9 }}
+          className="relative z-10 bg-white rounded-2xl shadow-xl p-6 w-full max-w-xs text-center"
+        >
+          <h3 className="text-base font-bold text-[#1E3A5F] mb-4">下载提示</h3>
+          <p className="text-sm text-[#6B7280] mb-4 leading-relaxed">
+            微信内无法直接下载高清海报。
+          </p>
+          <p className="text-sm text-[#6B7280] mb-5 leading-relaxed">
+            请长按海报预览图保存图片，或复制链接到浏览器打开下载高清海报。
+          </p>
+
+          <button
+            onClick={handleCopyLink}
+            className="w-full bg-[#1E3A5F] text-white text-sm font-semibold py-3 rounded-full hover:bg-[#C53030] transition-colors duration-200 mb-3"
+          >
+            复制链接
+          </button>
+          <button
+            onClick={() => setShowWechatTip(false)}
+            className="w-full text-sm text-[#6B7280] py-2 hover:text-[#111827] transition-colors"
+          >
+            关闭
+          </button>
+        </motion.div>
+      </div>
+    )}
+
     </motion.div>
   );
 }
