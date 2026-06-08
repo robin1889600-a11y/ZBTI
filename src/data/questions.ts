@@ -20,14 +20,14 @@ export const questions: Question[] = [
   {
     id: 2,
     dimension: 'order',
-    text: '比起踩点早读，你更喜欢打包好早餐（比如炒米）并提前到达教室，尽早进入学习状态。',
+    text: '比起踩点早读，你更喜欢打包好早餐并提前到达教室，尽早进入学习状态。',
     positiveType: '顺应秩序型',
     negativeType: '偷藏自由型',
   },
   {
     id: 3,
     dimension: 'order',
-    text: '即便早读开始久了，你也会盯着黑板或课本发呆，不是很想开口读书。',
+    text: '即便早读开始很久了，你也只是盯着黑板或课本发呆，不太想开口读书。',
     positiveType: '偷藏自由型',
     negativeType: '顺应秩序型',
   },
@@ -176,7 +176,7 @@ export const questions: Question[] = [
   {
     id: 24,
     dimension: 'energy',
-    text: '有时候只是望见东湖、远眺北岭，你都会觉得很悠闲、惬意。',
+    text: '有时候只是远眺东湖和北岭，你都会觉得很悠闲、惬意。',
     positiveType: '内向回血型',
     negativeType: '外放回血型',
   },
@@ -227,7 +227,7 @@ export const questions: Question[] = [
   {
     id: 31,
     dimension: 'pace',
-    text: '必要时，你们全宿舍可以做到全员20分钟内洗澡完毕。',
+    text: '必要时，你们宿舍可以做到全员20分钟内洗澡完毕。',
     positiveType: '高速推进型',
     negativeType: '慢热沉浸型',
   },
@@ -278,7 +278,7 @@ export const questions: Question[] = [
   {
     id: 38,
     dimension: 'emotion',
-    text: '一个人逛生物地理园，会让你的心情平静下来。',
+    text: '一个人逛生物园、地理园，会让你的心情平静下来。',
     positiveType: '内化消化型',
     negativeType: '外泄释放型',
   },
