@@ -10,7 +10,7 @@ const CREDITS = [
   { role: '策划 & 编程', members: '糖糖' },
   { role: '文本 & 创意', members: '糖糖　有虞　竹排子' },
   { role: '美术', members: '鱼鳞　AgNO₃　每' },
-  { role: '宣传', members: 'Rain　RY' },
+  { role: '宣传', members: 'Rain　RY　呱呱' },
   { role: '部署协助', members: '大炮' },
   { role: '测试协助', members: '醴年　有虞　竹排子　清源　九月秋　椰兔　：p　Rain RY　涯屿　日秋　凉皮　铁盒　AgNO₃　鱼鳞　Alice　子虚　比比　Ceilboo　moon　凡凡　弦三　小树　李客厅　木华　寻宁　呱呱　Lulu　每　Revol　大炮　小鸣　Nikie　徐节　Wilson' },
 ];

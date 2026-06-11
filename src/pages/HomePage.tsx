@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo';
 import CreditsModal from '../components/CreditsModal';
 import GeometricScene from '../components/webgl/GeometricScene';
@@ -9,6 +10,7 @@ interface HomePageProps {
 }
 
 export default function HomePage({ onStart }: HomePageProps) {
+  const navigate = useNavigate();
   const [showCredits, setShowCredits] = useState(false);
 
   return (
@@ -79,11 +81,24 @@ export default function HomePage({ onStart }: HomePageProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.65 }}
           onClick={onStart}
-          className="bg-[#1E3A5F] text-white text-lg font-semibold px-12 py-4 rounded-full
+          className="bg-[#1E3A5F] text-white text-lg font-semibold px-6 py-4 rounded-full border border-transparent
                      hover:bg-[#C53030] transition-colors duration-200
                      shadow-lg hover:shadow-xl active:scale-95 transition-transform"
+          style={{ width: '180px' }}
         >
           开始测试
+        </motion.button>
+
+        {/* Gallery entry button */}
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+          onClick={() => navigate('/gallery')}
+          className="bg-white text-[#1E3A5F] text-lg font-semibold px-6 py-4 rounded-full border border-gray-200 hover:bg-gray-50 transition-all duration-300 shadow-lg mt-4"
+          style={{ width: '180px' }}
+        >
+          肇中人图鉴
         </motion.button>
 
         {/* Credits link */}
